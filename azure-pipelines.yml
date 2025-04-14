@@ -40,5 +40,5 @@ steps:
     azureSubscription: 'haneendevops'
     appType: 'webAppLinux'
     WebAppName: 'nodehaneen'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    packageForLinux: '$(packagePath)'
     RuntimeStack: 'NODE|20-lts'

@@ -24,7 +24,6 @@
     "koa-session": "^5.0.0",
     "koa-static": "^3.0.0",
     "koa-views": "^6.0.2",
-    "streaming-json-stringify": "^3.1.0",
-    "swig-templates": "^2.0.3"
+    "streaming-json-stringify": "^3.1.0"
   }
 }

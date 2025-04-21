@@ -34,31 +34,6 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'haneendevops'
-    scriptType: bash
-    scriptLocation: inlineScript
-    inlineScript: |
-      RESOURCE_GROUP='nodehaneen_group'
-      APP_NAME='nodehaneen'
-      KUDU=https://$APP_NAME.scm.azurewebsites.net
-
-      echo "Getting publishing credentials..."
-      CREDS=$(az webapp deployment list-publishing-credentials \
-        --name $APP_NAME \
-        --resource-group $RESOURCE_GROUP \
-        --query '{user: publishingUserName, pass: publishingPassword}' -o json)
-
-      USERNAME=$(echo $CREDS | jq -r '.user')
-      PASSWORD=$(echo $CREDS | jq -r '.pass')
-
-      echo "Running cleanup commands inside App Service..."
-
-      curl -u $USERNAME:$PASSWORD \
-        -X POST "$KUDU/api/command" \
-        -H "Content-Type: application/json" \
-        -d '{ "command": "rm -f /home/site/locks/status.lock /home/site/locks/hooks.lock && rm -rf /home/site/deployments/*" }'
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
